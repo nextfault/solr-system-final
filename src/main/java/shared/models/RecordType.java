@@ -15,7 +15,7 @@ public enum RecordType {
         this.value = value;
     }
 
-    private String getValue(){
+    public String getValue(){
         return value;
     }
 

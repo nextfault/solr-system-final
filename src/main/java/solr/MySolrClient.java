@@ -7,7 +7,7 @@ import org.apache.solr.client.solrj.impl.HttpSolrClient;
  */
 public class MySolrClient {
 
-    private static final String URL="http://localhost:8983/solr/basic_core";
+    private static final String URL="http://localhost:8983/solr/basic";
     private static MySolrClient instance = new MySolrClient();
     private HttpSolrClient client = null;
 

@@ -4,6 +4,7 @@ import com.sun.org.apache.regexp.internal.RE;
 import input.context.ContextParser;
 import input.datasource.support.CSVDataProviderImpl;
 import shared.models.Record;
+import shared.models.RecordType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,13 +23,13 @@ public class DataProviderManager {
             System.out.println();
         }
 
-        preParse(records);
-        return null;
+        return preParse(records);
     }
 
     public static List<Record> preParse(List<Record> records){
         if (records == null) return new ArrayList<Record>();
         for (Record record : records) {
+            record.setRecordType(RecordType.Math);
             record.setContext(ContextParser.preParse(record.getContext()));
         }
         return records;

@@ -54,7 +54,7 @@ public class IndexBuilder {
     SolrInputDocument parse2SolrDoc(Record record){
         SolrInputDocument solrInputDocument = new SolrInputDocument();
         solrInputDocument.addField("id",indexCount++);
-        solrInputDocument.addField("recordType",record.getRecordType().getValue());
+        solrInputDocument.addField("recordtype",record.getRecordType().getValue());
         solrInputDocument.addField("context",record.getContext());
         return solrInputDocument;
     }
