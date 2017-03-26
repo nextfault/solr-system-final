@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="/solr-system-final/assets/favicon.ico">
 
-    <title>Blog Template for Bootstrap</title>
+    <title>SolrSearch</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/solr-system-final/css/bootstrap.min.css" rel="stylesheet">
@@ -24,7 +24,7 @@
 </head>
 
 <body>
-
+<a id="_top"></a>
 <div class="blog-masthead">
     <div class="container">
         <nav class="blog-nav">
@@ -71,7 +71,7 @@
     </div>
     <div class="arctive">
         <div class="contentType">
-            <a href="#">Back to top</a>
+            <a href="#_top">Back to TOP</a>
         </div>
     </div>
 </div><!-- /.container -->
