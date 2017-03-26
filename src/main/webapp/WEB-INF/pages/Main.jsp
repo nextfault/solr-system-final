@@ -7,6 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
+
     <link rel="icon" href="/solr-system-final/assets/favicon.ico">
 
     <title>SolrSearch</title>
@@ -21,6 +22,8 @@
 
     <script src="/solr-system-final/assets/js/ie-emulation-modes-warning.js"></script>
 
+    <script src="/solr-system-final/js/main.js"></script>
+
 </head>
 
 <body>
@@ -29,9 +32,9 @@
     <div class="container">
         <nav class="blog-nav">
             <a class="blog-nav-item" href="#">SolrSearch</a>
-            <form class="navbar-form navbar-right">
+            <form class="navbar-form navbar-right" id="SearchFrom" method="post" action="/solr-system-final/action/search/">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="key word">
+                    <input type="text" name="keyword" id="keyword" class="form-control" placeholder="key word">
                 </div>
                 <button type="submit" class="btn btn-default">search</button>
             </form>
