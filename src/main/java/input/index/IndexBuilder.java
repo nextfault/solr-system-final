@@ -19,17 +19,9 @@ public class IndexBuilder {
     private static long indexCount = 0;
     private HttpSolrClient solrClient = null;
 
-
     IndexBuilder(){
         solrClient = MySolrClient.getInstance().getClient();
     }
-
-    public static void main(String[] args) {
-        IndexBuilder indexBuilder = new IndexBuilder();
-        indexBuilder.build();
-
-    }
-
 
     boolean build(){
         List<Record> records = DataProviderManager.getRecordList();
