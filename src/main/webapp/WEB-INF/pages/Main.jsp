@@ -8,6 +8,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <script>window.jQuery || document.write('<script src="/solr-system-final/assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="/solr-system-final/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="/solr-system-final/assets/js/ie10-viewport-bug-workaround.js"></script>
+
     <link rel="icon" href="/solr-system-final/assets/favicon.ico">
 
     <title>SolrSearch</title>
@@ -32,45 +37,35 @@
     <div class="container">
         <nav class="blog-nav">
             <a class="blog-nav-item" href="#">SolrSearch</a>
-            <form class="navbar-form navbar-right" id="SearchFrom" method="post" action="/solr-system-final/action/search/">
+            <div class="navbar-form navbar-right" id="SearchFrom">
                 <div class="form-group">
-                    <input type="text" name="keyword" id="keyword" class="form-control" placeholder="key word">
+                    <input type="text" name="keyword" id="keyword" class="form-control" placeholder="keyword">
                 </div>
-                <button type="submit" class="btn btn-default">search</button>
-            </form>
+                <button id="submitBtn" class="btn btn-default">search</button>
+            </div>
         </nav>
     </div>
 </div>
 
 <div class="container">
-    <div class="arctive">
-        <div class="contentType">
-            暂无搜索结果
+    <div id = "searchResult">
+        <div class="arctive">
+            <div class="contentType">
+                暂无搜索结果
+            </div>
         </div>
-    </div>
-    <div class="arctive">
-        <div class="votebar">
-            <span class="votebar_icon"></span>支持
-        </div>
-        <div class="author">
-            <b>小明1</b>这是我的个性签名
-            <p>288个赞同</p>
-        </div>
-        <div class="contentType">
-            本回答分成【旅游版】和【日常版】，游客和长时间生活在长沙的人需求不一样所以分开写啦。高票答主提到的那些也不赘述。
-        </div>
-    </div>
-    <div class="arctive">
-        <div class="votebar">
-            <span class="votebar_icon"></span>支持
-        </div>
-        <div class="author">
-            <b>小明2</b>这是我的个性签名
-            <p>288个赞同</p>
-        </div>
-        <div class="contentType">
-            本回答分成【旅游版】和【日常版】，游客和长时间生活在长沙的人需求不一样所以分开写啦。高票答主提到的那些也不赘述。
-        </div>
+        <%-- <div class="arctive">
+             <div class="votebar">
+                 <span class="votebar_icon"></span>支持
+             </div>
+             <div class="author">
+                 <b>小明2</b>这是我的个性签名
+                 <p>288个赞同</p>
+             </div>
+             <div class="contentType">
+                 本回答分成【旅游版】和【日常版】，游客和长时间生活在长沙的人需求不一样所以分开写啦。高票答主提到的那些也不赘述。
+             </div>
+         </div>--%>
     </div>
     <div class="arctive">
         <div class="contentType">
@@ -88,9 +83,5 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script>window.jQuery || document.write('<script src="/solr-system-final/assets/js/vendor/jquery.min.js"><\/script>')</script>
-<script src="/solr-system-final/js/bootstrap.min.js"></script>
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="/solr-system-final/assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>

@@ -6,24 +6,25 @@ import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
+import shared.models.Record;
+import shared.models.RecordType;
 import solr.MySolrClient;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by Steven's on 2017/3/10.
  */
 public class SolrQueryManager {
-    private static HttpSolrClient solrClient = null;
+    private static HttpSolrClient solrClient = MySolrClient.getInstance().getClient();
 
-    SolrQueryManager(){
-        solrClient = MySolrClient.getInstance().getClient();
-    }
+    public static List<Record> query(String queryStr) throws SolrServerException, IOException {
+        List<Record> recordList = new ArrayList<Record>();
 
-    public static void query(String queryStr) throws SolrServerException, IOException {
         SolrQuery query = new SolrQuery();
         query.setRequestHandler("/select");
         query.setQuery(String.format("context:%s",queryStr));
@@ -36,21 +37,15 @@ public class SolrQueryManager {
         while(iter.hasNext()){
             SolrDocument doc = iter.next();
             String id  = (String)doc.getFieldValue("id");
-            Collection<String> names = doc.getFieldNames();
-            for (String fName : names){
-                java.lang.Object fValue = doc.getFieldValue(fName);
-                boolean isString = fValue instanceof String;
-                boolean isList = fValue instanceof ArrayList<?>;
-                if (isString){
-                    fValue = (String)fValue;
-                    System.out.print("fieldName:"+fName+"  filedValue:"+fValue+"\n");
-                }
-                if (isList){
-                    for (String s : (ArrayList<String>)fValue){
-                        System.out.print("fieldName:"+fName+"  filedValue:"+String.valueOf(s)+"\n");
-                    }
-                }
-            }
+            List contextList = (List)doc.getFieldValue("context");
+            String context = (String) contextList.get(0);
+            RecordType recordType = RecordType.findByValue((String) doc.getFieldValue("recordtype"));
+            Record record = new Record(context);
+            record.setRecordType(recordType);
+            record.setId(Long.parseLong(id));
+            recordList.add(record);
         }
+
+        return recordList;
     }
 }
