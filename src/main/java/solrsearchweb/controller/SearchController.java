@@ -26,12 +26,23 @@ public class SearchController {
         List<Record> records;
         try {
             String keyword = request.getParameter("keyword");
-            String dd = "";
-            records = SolrQueryManager.query(request.getParameter("keyword"));
+            records = SolrQueryManager.queryWithHightLight(request.getParameter("keyword"));
         }catch (Exception ex){
             return new ArrayList<Record>();
         }
-
         return records;
+    }
+
+    @RequestMapping("/suggest/")
+    @ResponseBody
+    public List<String> getSuggest(HttpServletRequest request){
+        List<String> suggestions;
+        try {
+            String keyword = request.getParameter("word");
+            suggestions = SolrQueryManager.getSuggest(request.getParameter("keyword"));
+        }catch (Exception ex){
+            return new ArrayList<String>();
+        }
+        return suggestions;
     }
 }

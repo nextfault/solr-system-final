@@ -23,6 +23,10 @@ public class IndexBuilder {
         solrClient = MySolrClient.getInstance().getClient();
     }
 
+    public static void main(String args[]) {
+        IndexBuilder indexBuilder = new IndexBuilder();
+        indexBuilder.build();
+    }
     boolean build(){
         List<Record> records = DataProviderManager.getRecordList();
         List<SolrInputDocument> docs = new ArrayList<SolrInputDocument>();

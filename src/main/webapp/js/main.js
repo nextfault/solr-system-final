@@ -1,5 +1,8 @@
 
 $(function(){
+    $("#keyword").keyup(function(){
+        getsuggest($("#keyword").val());
+    });
     $("#submitBtn").click(function(){
         var keyword = $("#keyword").val();
         $.ajax({
@@ -12,7 +15,6 @@ $(function(){
 
             success : function (data) {
                 $("#searchResult").html("");
-                console.log(data);
                 var tmp = "";
                 if (data.length == 0){
                     tmp += appendnoresult();
@@ -24,7 +26,6 @@ $(function(){
                 $("#searchResult").html(tmp)
             },
             error:function (XMLHttpRequest, textStatus, errorThrown) {
-
             }
         });
     })
@@ -42,6 +43,37 @@ $(function(){
 
     function appendnoresult() {
         var htmlstr = "<div class='arctive'><div class='contentType'>暂无搜索结果</div></div>";
+        return htmlstr;
+    }
+
+    function getsuggest(word) {
+        $.ajax({
+            url : "/solr-system-final/action/suggest/",
+            dataType : "json",
+            contetType : "application/json",
+            async : true,
+            type : "POST",
+            data : {keyword : word},
+
+            success : function (data) {
+                $("#mylist").html("");
+                console.log(data);
+                var tmp = "";
+                if (data.length != 0){
+                    tmp += appendsuggest(data);
+                }
+                $("#mylist").html(tmp);
+            },
+            error:function (XMLHttpRequest, textStatus, errorThrown) {
+            }
+        });
+    }
+    function appendsuggest(data) {
+        var htmlstr = "";
+        data.forEach(function (item,index) {
+            htmlstr += "<option>"+item+"</option>"
+        })
+        htmlstr += "<option>"+"</option>"
         return htmlstr;
     }
 });

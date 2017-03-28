@@ -213,3 +213,7 @@ h6, .h6 {
             display: block;
             margin-left: 13px;
 }
+
+mark {
+    color: #f00;
+}
