@@ -8,10 +8,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 
 @Controller
-@RequestMapping("/solrSearch/")
+@RequestMapping("/solrSearch")
 public class ViewController {
     @RequestMapping
     public String defaultPage() {
         return "Main";
+    }
+
+    @RequestMapping("/input")
+    public String inputPage(){
+        return "Input";
     }
 }

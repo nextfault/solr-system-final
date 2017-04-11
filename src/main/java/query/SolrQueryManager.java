@@ -18,9 +18,9 @@ import java.util.*;
  * Created by Steven's on 2017/3/10.
  */
 public class SolrQueryManager {
-    private static HttpSolrClient solrClient = MySolrClient.getInstance().getClient();
+    private static HttpSolrClient solrClient = MySolrClient.getInstance().getQueryClient();
 
-    public static List<Record> query(String queryStr) throws SolrServerException, IOException {
+    public static List<Record> query(String queryStr,Integer pageNum,Integer pageSize) throws SolrServerException, IOException {
         List<Record> recordList = new ArrayList<Record>();
         SolrQuery query = new SolrQuery();
         query.setRequestHandler("/select");
@@ -43,7 +43,16 @@ public class SolrQueryManager {
         return recordList;
     }
 
-    public static List<Record> queryWithHightLight(String queryStr) throws SolrServerException, IOException {
+    /**
+     *
+     * @param queryStr 关键词
+     * @param pageNum 页号
+     * @param pageSize 每页大小
+     * @return
+     * @throws SolrServerException
+     * @throws IOException
+     */
+    public static List<Record> queryWithHightLight(String queryStr,Integer pageNum,Integer pageSize) throws SolrServerException, IOException {
         List<Record> recordList = new ArrayList<Record>();
         SolrQuery query = new SolrQuery();
         query.setRequestHandler("/select");
@@ -52,7 +61,9 @@ public class SolrQueryManager {
         query.addHighlightField("context");// 高亮字段
         query.setHighlightSimplePre("<mark>");// 标记
         query.setHighlightSimplePost("</mark>");
-        query.setSort("id", SolrQuery.ORDER.asc);
+        query.setStart((pageNum - 1) * pageSize);
+        query.setRows(pageSize);
+//        query.setSort("id", SolrQuery.ORDER.asc);
         QueryResponse rsp = solrClient.query(query);
 
         Map rspMap = rsp.getHighlighting();
