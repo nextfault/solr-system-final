@@ -9,14 +9,9 @@ public class SolrServerClient {
     private String SOLR_ADMIN_URL = "http://localhost:8983/solr/basic";
     private static HttpSolrClient server = null;
     private volatile static SolrServerClient solrServiceClient = null;
-
-
-
     private SolrServerClient() {
         this.getServer();
     }
-
-
     /**
      * SolrServerClient 是线程安全的 需要采用单例模式
      * 此处实现方法适用于高频率调用查询
@@ -33,8 +28,6 @@ public class SolrServerClient {
         }
         return solrServiceClient;
     }
-
-
     /**
      * 初始化的HttpSolrServer 对象,并获取此唯一对象
      * 配置按需调整

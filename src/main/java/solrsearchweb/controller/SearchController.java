@@ -76,6 +76,7 @@ public class SearchController {
                     InputStream input = myfile.getInputStream();
                     final CsvReader reader =   new CsvReader(input, Charset.forName("UTF-8"));
                     CSVDataProviderImpl csvDataProvider = new CSVDataProviderImpl();
+                    //获取前端页面上传的CSV的题目内容
                     final List<Record> records = csvDataProvider.getDataSource(reader);
                     num = records.size();
                     // 分10组 并发导入索引
@@ -83,18 +84,6 @@ public class SearchController {
                     final List<Future<Boolean>> futureList = new ArrayList<Future<Boolean>>();
                     final List<Boolean> resultList = new ArrayList<Boolean>();
                     Boolean allResult = true;
-/*                    CodeTimer.execute("IndexBuilder", 1, new Callable<Boolean>() {
-                        public Boolean call() throws Exception {
-                            for (List<Record> recordList : map.values()) {
-                                Future<Boolean> indexBuilder = IndexBuilder.buildAsync(recordList);
-                                futureList.add(indexBuilder);
-                            }
-                            for (Future<Boolean> booleanFuture : futureList) {
-                                resultList.add(booleanFuture.get());
-                            }
-                            return true;
-                        }
-                    });*/
                     Long startTimeMs = 0L;
                     Long endTimeMs = 0L;
                     startTimeMs = System.currentTimeMillis();
@@ -102,12 +91,15 @@ public class SearchController {
                         Future<Boolean> indexBuilder = IndexBuilder.buildAsync(recordList);
                         futureList.add(indexBuilder);
                     }
+                    //获取分组 每组是否索引成功
                     for (Future<Boolean> booleanFuture : futureList) {
                         resultList.add(booleanFuture.get());
                     }
 //                    IndexBuilder.build(records);
+                    //提交Solr
                     SolrServerClient.getInstance().getServer().commit();
                     endTimeMs = System.currentTimeMillis();
+                    //计算索引构建耗时
                     time =endTimeMs - startTimeMs;
                     for (Boolean aBoolean : resultList) {
                         allResult = allResult && aBoolean;
