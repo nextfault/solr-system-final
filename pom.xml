@@ -11,7 +11,7 @@
     <properties>
         <solr.version>5.5.4</solr.version>
         <spring.version>4.3.4.RELEASE</spring.version>
-        <jackson.version>2.5.4</jackson.version>
+        <jackson.version>2.10.1</jackson.version>
     </properties>
 
     <dependencies>
